@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Windows 屏幕直播</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #f2f2f2;
+    }
+    .topbar {
+      padding: 10px 14px;
+      background: #1e1e1e;
+      border-bottom: 1px solid #333;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    .screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 52px);
+      overflow: hidden;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 1px solid #2f2f2f;
+      background: #000;
+    }
+    .pill {
+      background: #2a2a2a;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="pill">编码: JPEG</div>
+    <div class="pill">质量: {{ jpeg_quality }}</div>
+    <div class="pill">采样 FPS: {{ fps }}</div>
+    <div class="pill">显示器: {{ monitor_index }}</div>
+  </div>
+  <div class="screen">
+    <img src="/stream.mjpg" alt="screen stream" />
+  </div>
+</body>
+</html>
