@@ -1,6 +1,13 @@
 屏幕捕获 + Web 实时预览
 
-跨语言实现的屏幕捕获服务：捕获桌面画面，以 MJPEG 方式推流，通过浏览器实时查看。
+## 关于ScreenDominator 
+
+通过dll注入方式来实现反反截图功能 需要自行编译   
+程序找到设置了 `WindowDisplayAffinity` 的窗口（即启用了显示保护/反采集的窗口），然后将对应的 hook DLL 注入到目标进程中，处理反截图行为。    
+仅供交流学习！  请勿用做非法用途！  
+### 跨语言实现的屏幕捕获服务：捕获桌面画面，以 MJPEG 方式推流，通过浏览器实时查看。
+
+
 
 提供三种语言实现，功能一致，按需选用：
 
@@ -9,6 +16,7 @@
 | **C# (.NET 8)** | `Program.cs` | Windows | .NET 8 SDK |
 | **Python** | `app.py` | 跨平台 | Python 3 + OpenCV / mss / Flask |
 | **Go** | `main.go` | Windows | Go 1.22+ |
+
 
 ## 快速开始
 
@@ -85,15 +93,24 @@ FPS=15 JPEG_QUALITY=80 python app.py
 ## 项目结构
 
 ```
-├── Program.cs          # C# 实现（主程序 + 内嵌 HTML）
-├── obs.csproj          # C# 项目文件
-├── build.ps1           # C# 编译脚本（PowerShell）
-├── app.py              # Python 实现
-├── requirements.txt    # Python 依赖
+├── Program.cs              # C# 实现（主程序 + 内嵌 HTML）
+├── obs.csproj              # C# 项目文件
+├── build.ps1               # C# 编译脚本（PowerShell）
+├── app.py                  # Python 实现
+├── requirements.txt        # Python 依赖
 ├── templates/
-│   └── index.html      # Python 版 Web 页面模板
-├── main.go             # Go 实现
-├── go.mod              # Go 模块定义
+│   └── index.html          # Python 版 Web 页面模板
+├── main.go                 # Go 实现
+├── go.mod                  # Go 模块定义
+├── ScreenDominator/        # Windows 干掉霸屏
+│   ├── src/main.c          # 主程序源码
+│   ├── ScreenDominator.exe # 32 位控制端
+│   ├── InjectHookDll32.dll # 注入 32 位目标进程
+│   ├── InjectHookDll64.dll # 注入 64 位目标进程
+│   ├── wow64ext.dll        # 32 位进程操作 64 位进程的辅助库
+│   ├── README.md           # ScreenDominator 说明文档
+│   ├── Makefile            # 编译脚本
+│   └── build.bat           # Windows 编译脚本
 └── README.md
 ```
 
